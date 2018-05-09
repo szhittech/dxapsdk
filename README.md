@@ -1,10 +1,10 @@
 # 和而泰（H&T）设备配网Android端使用说明
 
 
-- **配网demo程序请查看dxapsdk下的app程序；**
+- **配网`demo`程序请查看`dxapsdk`下的`app`程序；**
 
 
-- **配网库请使用hetapsdk-1.0.0.jar**
+- **配网库请使用`hetapsdk-1.0.0.jar`**
 
 ----
 ## 扫描
