@@ -8,7 +8,7 @@
 - context 上下文；
 - ssid：路由器的WiFi名称；
 - pass：路由器的密码；
-- mode：设备类型；
+- mode：设备型号；
 - onApScanListener:扫描回调
 - timeout:扫描的超时时间，不填写默认100秒
 
