@@ -80,7 +80,7 @@
 
 ## android权限
 
-### 需要再AndroidMnifest.xml中申明的权限
+### 需要AndroidMnifest.xml中申明的权限
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
