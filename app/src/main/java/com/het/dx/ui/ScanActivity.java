@@ -12,7 +12,7 @@ import android.widget.ListView;
 import com.het.ap.HeTApApi;
 import com.het.ap.bean.ApDeviceBean;
 import com.het.ap.callback.OnApBindListener;
-import com.het.ap.callback.OnApScanLinstaner;
+import com.het.ap.callback.OnApScanListener;
 import com.het.dx.R;
 import com.het.dx.adpter.WiFiAdpter;
 
@@ -48,7 +48,7 @@ public class ScanActivity extends BaseActivity implements AdapterView.OnItemClic
 
         HeTApApi.getInstance().setLogEnable(true);
 
-        HeTApApi.getInstance().scan(this,ssid,pass,mode,onApScanLinstaner);
+        HeTApApi.getInstance().scan(this,ssid,pass,mode, onApScanListener);
         showLoading("扫描Ap热点中...");
     }
 
@@ -66,15 +66,15 @@ public class ScanActivity extends BaseActivity implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        ApDeviceBean target = list.get(i);
-        if (target==null)
+        ApDeviceBean selectTarget = list.get(i);
+        if (selectTarget==null)
             return;
-        HeTApApi.getInstance().bind(target,null,onApBindListener);
-        showLoading("绑定["+ target.getSsid() +"]设备中...");
+        HeTApApi.getInstance().bind(selectTarget,null,onApBindListener);
+        showLoading("绑定["+ selectTarget.getSsid() +"]设备中...");
     }
 
 
-    private OnApScanLinstaner onApScanLinstaner = new OnApScanLinstaner() {
+    private OnApScanListener onApScanListener = new OnApScanListener() {
         @Override
         public void onConnDeviceApTimeout(Context context, String ssid) {
             hideLoading();
@@ -148,3 +148,4 @@ public class ScanActivity extends BaseActivity implements AdapterView.OnItemClic
 
 
 }
+

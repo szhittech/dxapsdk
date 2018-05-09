@@ -77,3 +77,51 @@
 - false关闭日志
 - 默认日志是关闭的
 
+
+## android权限
+
+### 需要再AndroidMnifest.xml中申明的权限
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
+### 需要动态获取的权限
+    
+    Manifest.permission.ACCESS_WIFI_STATE,
+    Manifest.permission.CHANGE_WIFI_STATE,
+    Manifest.permission.ACCESS_COARSE_LOCATION,
+    Manifest.permission.ACCESS_FINE_LOCATION
+
+### GPS开关必须开启
+    /**
+     * 判断位置信息是否开启
+     *
+     * @return
+     */
+    public boolean isLocationOpen() {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+    return true;
+    LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    //gps定位
+    boolean isGpsProvider = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    //网络定位
+    boolean isNetWorkProvider = manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    return isGpsProvider || isNetWorkProvider;
+    }
+
+
+跳转到系统界面开启gps定位
+
+    /**
+     * 跳转系统设置定位
+     */
+    public void gotoGpsSetting() {
+    // 转到手机设置界面，用户设置GPS
+    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+    startActivityForResult(intent, SETTING_GPS); // 设置完成后返回到原来的界面
+    }
