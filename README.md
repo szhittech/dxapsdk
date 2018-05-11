@@ -6,6 +6,8 @@
 
 - **配网库请使用`hetapsdk-1.0.1.jar`**
 
+- **demo程序详见`app/app-release.apk`**
+
 ----
 ## 扫描
 
