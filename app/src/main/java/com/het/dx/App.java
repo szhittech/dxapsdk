@@ -3,13 +3,12 @@ package com.het.dx;
 import android.app.Application;
 
 import com.fsix.mqtt.MqttConnManager;
-import com.het.websocket.WsBootstrap;
 
 public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        WsBootstrap.init(this);
+//        WsBootstrap.init(this);
     }
 
     @Override
@@ -17,6 +16,6 @@ public class App extends Application {
         super.onTerminate();
         MqttConnManager.getInstances().stop();
 
-        WsBootstrap.destroy(this);
+//        WsBootstrap.destroy(this);
     }
 }
