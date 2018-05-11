@@ -24,6 +24,7 @@ hs_err_pid*
 .idea
 *iml
 .svn
+airkey.jks
 build
 hetapsdk
 tcp
