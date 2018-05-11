@@ -25,6 +25,7 @@ hs_err_pid*
 *iml
 .svn
 build
+hetapsdk
 tcp
 local.properties
 addgit.cmd
