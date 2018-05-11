@@ -124,8 +124,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                progressDialog.setMessage(TextUtils.isEmpty(msg) ? "加载中..." : msg);
-                progressDialog.show();
+                try {
+                    progressDialog.setMessage(TextUtils.isEmpty(msg) ? "加载中..." : msg);
+                    progressDialog.show();
+                }catch (Exception e){
+
+                }
             }
         });
     }
@@ -136,7 +140,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                progressDialog.dismiss();
+                try {
+                    progressDialog.dismiss();
+                }catch (Exception e){
+
+                }
+
             }
         });
     }

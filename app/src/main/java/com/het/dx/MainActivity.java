@@ -12,7 +12,7 @@ import com.het.dx.ui.BaseActivity;
 import com.het.dx.ui.ScanActivity;
 
 public class MainActivity extends BaseActivity {
-    private EditText ssid_et,pass_et,mode_et;
+    private EditText ssid_et,pass_et,mode_et,deviceip_id;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -23,6 +23,7 @@ public class MainActivity extends BaseActivity {
         ssid_et = (EditText) findViewById(R.id.ssid_id);
         pass_et = (EditText) findViewById(R.id.pass_id);
         mode_et = (EditText) findViewById(R.id.mode_id);
+        deviceip_id = (EditText) findViewById(R.id.deviceip_id);
     }
 
     @Override
@@ -34,6 +35,7 @@ public class MainActivity extends BaseActivity {
         String ssid = ssid_et.getText().toString();
         String pass = pass_et.getText().toString();
         String mode = mode_et.getText().toString();
+        String deviceIp = deviceip_id.getText().toString();
         if (TextUtils.isEmpty(ssid)){
             tips("ssid不能为空");
             return;
@@ -50,6 +52,7 @@ public class MainActivity extends BaseActivity {
         intent.putExtra("ssid",ssid);
         intent.putExtra("pass",pass);
         intent.putExtra("mode",mode);
+        intent.putExtra("deviceIp",deviceIp);
         intent.setClass(this, ScanActivity.class);
         startActivity(intent);
     }

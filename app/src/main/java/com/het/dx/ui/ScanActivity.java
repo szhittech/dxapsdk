@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -21,11 +22,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ScanActivity extends BaseActivity implements AdapterView.OnItemClickListener{
+public class ScanActivity extends BaseActivity implements AdapterView.OnItemClickListener {
     private WiFiAdpter wiFiAdpter;
     private ListView listView;
     private List<ApDeviceBean> list = new ArrayList<>();
     private Set<String> filter = new HashSet<>();
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_scan;
@@ -33,7 +35,7 @@ public class ScanActivity extends BaseActivity implements AdapterView.OnItemClic
 
     @Override
     protected void onView() {
-        wiFiAdpter = new WiFiAdpter(this,list);
+        wiFiAdpter = new WiFiAdpter(this, list);
         listView = (ListView) findViewById(R.id.list_view);
         listView.setAdapter(wiFiAdpter);
         listView.setOnItemClickListener(this);
@@ -45,10 +47,14 @@ public class ScanActivity extends BaseActivity implements AdapterView.OnItemClic
         String ssid = intent.getStringExtra("ssid");
         String pass = intent.getStringExtra("pass");
         String mode = intent.getStringExtra("mode");
+        String deviceIp = intent.getStringExtra("deviceIp");
+        if (!TextUtils.isEmpty(deviceIp)) {
+            HeTApApi.deviceIp = deviceIp;
+        }
 
         HeTApApi.getInstance().setLogEnable(true);
 
-        HeTApApi.getInstance().scan(this,ssid,pass,mode, onApScanListener);
+        HeTApApi.getInstance().scan(this, ssid, pass, mode, onApScanListener);
         showLoading("扫描Ap热点中...");
     }
 
@@ -67,10 +73,10 @@ public class ScanActivity extends BaseActivity implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         ApDeviceBean selectTarget = list.get(i);
-        if (selectTarget==null)
+        if (selectTarget == null)
             return;
-        HeTApApi.getInstance().bind(selectTarget,null,onApBindListener);
-        showLoading("绑定["+ selectTarget.getSsid() +"]设备中...");
+        HeTApApi.getInstance().bind(selectTarget, null, onApBindListener);
+        showLoading("绑定[" + selectTarget.getSsid() + "]设备中...");
     }
 
 
@@ -78,7 +84,7 @@ public class ScanActivity extends BaseActivity implements AdapterView.OnItemClic
         @Override
         public void onConnDeviceApTimeout(Context context, String ssid) {
             hideLoading();
-            showDialog("连接设备热点["+ ssid+"]失败，是否尝试手动连接", new DialogInterface.OnClickListener() {
+            showDialog("连接设备热点[" + ssid + "]失败，是否尝试手动连接", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     Intent wifiSettingsIntent = new Intent("android.settings.WIFI_SETTINGS");
