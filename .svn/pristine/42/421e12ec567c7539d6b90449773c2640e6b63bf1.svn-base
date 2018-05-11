@@ -1,3 +1,0 @@
-@echo off
-git rm -r --cache hetapsdk
-pause
