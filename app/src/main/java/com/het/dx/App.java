@@ -2,7 +2,6 @@ package com.het.dx;
 
 import android.app.Application;
 
-import com.fsix.mqtt.MqttConnManager;
 
 public class App extends Application {
     @Override
@@ -14,7 +13,7 @@ public class App extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
-        MqttConnManager.getInstances().stop();
+//        MqttConnManager.getInstances().stop();
 
 //        WsBootstrap.destroy(this);
     }
