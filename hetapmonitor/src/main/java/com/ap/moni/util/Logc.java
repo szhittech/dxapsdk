@@ -1,4 +1,4 @@
-package com.fsix.mqtt.util;
+package com.ap.moni.util;
 
 import android.annotation.TargetApi;
 import android.os.Build;

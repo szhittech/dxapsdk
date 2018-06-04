@@ -1,28 +1,7 @@
-package com.het.gateway.util;
-import com.clife.smarthome.common.DriverContants;
-import com.clife.smarthome.common.DriverInfo;
-import com.clife.smarthome.common.SocketModel;
+package com.ap.moni.util;
 
 public class APConst {
-    static {
-        broadcastAddress = IPUtil.getPCBroadcastAddress();
-        localIp = IPUtil.getPCIpAddress();
-        deviceMac = IPUtil.getDeviceMac();
-        broadcastAddress = DriverInfo.getBroadcastAddress();
-
-        getPlatformInfo();
-    }
-
-    public static void getPlatformInfo(){
-        SocketModel socketModel = DriverInfo.getSocketInfo();
-        localIp = socketModel.getIp();
-        deviceMac = socketModel.getMac();
-        deviceType = DriverContants.deviceType;
-        deviceSubType = DriverContants.deviceSubType;
-        broadcastAddress = DriverInfo.getBroadcastAddress();
-    }
-
-
+    public final static int listenerPort = 18899;
 
     public static Integer deviceType = 80;
     public static Integer deviceSubType = 5;

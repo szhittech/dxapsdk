@@ -1,4 +1,4 @@
-package com.ap.moni.wifi;
+package com.ap.moni.wifi.tool;
 
 import android.content.Context;
 import android.net.DhcpInfo;

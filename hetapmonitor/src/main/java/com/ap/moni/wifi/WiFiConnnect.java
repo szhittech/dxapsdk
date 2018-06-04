@@ -1,4 +1,4 @@
-package pi.com.pi.wifi;
+package com.ap.moni.wifi;
 
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;

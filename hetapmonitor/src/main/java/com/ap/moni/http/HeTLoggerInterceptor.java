@@ -1,4 +1,4 @@
-package com.het.gateway.sdk.interceptor;
+package com.ap.moni.http;
 
 import android.text.TextUtils;
 
@@ -7,7 +7,6 @@ import com.het.log.Logc;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -19,7 +18,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.Buffer;
-import okio.BufferedSource;
 
 /**
  * Created by zhy on 16/3/1.

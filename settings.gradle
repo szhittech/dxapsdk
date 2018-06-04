@@ -1,4 +1,7 @@
 include ':app'
 include ':hetapsdk'
-include ':tcp'
+//include ':tcp'
+//include ':apmonitor'
+//include ':tcplib'
+//include ':hetapmonitor'
 

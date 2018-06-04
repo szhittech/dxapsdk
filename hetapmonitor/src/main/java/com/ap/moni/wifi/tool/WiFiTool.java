@@ -1,4 +1,4 @@
-package com.ap.moni.wifi;
+package com.ap.moni.wifi.tool;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,17 +9,16 @@ import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.fsix.mqtt.util.Logc;
+import com.ap.moni.util.Base64;
+import com.ap.moni.util.Logc;
+import com.ap.moni.util.SpUtil;
+import com.ap.moni.wifi.tool.callback.WiFiConnCallback;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import pi.com.pi.bean.WiFiBean;
-import pi.com.pi.util.Base64;
-import pi.com.pi.util.SpUtil;
-import pi.com.pi.wifi.callback.WiFiConnCallback;
 
 public class WiFiTool {
     Context context;
@@ -81,6 +80,9 @@ public class WiFiTool {
                 wiFiConnCallback.onWiFiConnected(ssid, password);
                 return;
             }
+        }
+        if (mWifiUtils!=null){
+            mWifiUtils.WifiOpen();
         }
         if (threadCheckDone != null) {
             threadCheckDone.interrupt();

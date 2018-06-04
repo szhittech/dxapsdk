@@ -1,4 +1,4 @@
-package pi.com.pi.bean;
+package com.ap.moni.wifi.tool;
 
 import java.io.Serializable;
 

@@ -1,7 +1,6 @@
-package com.het.gateway.sdk.http;
+package com.ap.moni.http;
 
 import com.het.basic.base.helper.RxSchedulers;
-import com.het.gateway.sdk.interceptor.HeTLoggerInterceptor;
 
 import java.io.IOException;
 import java.util.Map;

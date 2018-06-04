@@ -1,9 +1,11 @@
-package com.het.gateway.bean;
+package com.ap.moni.udp;
 
 public class ApbindBean {
     private String random;
     private String ssid;
     private String password;
+    private String deviceMac;
+    private String deviceCode;
     private int hostType;
     private int capabilities;
 
@@ -21,9 +23,27 @@ public class ApbindBean {
                 "random='" + random + '\'' +
                 ", ssid='" + ssid + '\'' +
                 ", password='" + password + '\'' +
+                ", deviceMac='" + deviceMac + '\'' +
+                ", deviceCode='" + deviceCode + '\'' +
                 ", hostType=" + hostType +
                 ", capabilities=" + capabilities +
                 '}';
+    }
+
+    public String getDeviceMac() {
+        return deviceMac;
+    }
+
+    public void setDeviceMac(String deviceMac) {
+        this.deviceMac = deviceMac;
+    }
+
+    public String getDeviceCode() {
+        return deviceCode;
+    }
+
+    public void setDeviceCode(String deviceCode) {
+        this.deviceCode = deviceCode;
     }
 
     public String getRandom() {

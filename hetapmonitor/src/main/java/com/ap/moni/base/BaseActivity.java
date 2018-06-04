@@ -1,24 +1,21 @@
-package pi.com.pi.base;
+package com.ap.moni.base;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.ap.moni.util.AppTools;
+import com.ap.moni.util.Base64;
+import com.ap.moni.util.SpUtil;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
-import pi.com.pi.R;
-import pi.com.pi.util.AppTools;
-import pi.com.pi.util.Base64;
-import pi.com.pi.util.SpUtil;
 import rx.functions.Action1;
+
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -34,6 +31,13 @@ public abstract class BaseActivity extends AppCompatActivity {
             Manifest.permission.CAMERA,
             Manifest.permission.CALL_PHONE
     };
+    public void hideInputMethod() {
+        View viewFocus = this.getCurrentFocus();
+        if (viewFocus != null) {
+            ((InputMethodManager)this.getSystemService("input_method")).hideSoftInputFromWindow(viewFocus.getWindowToken(), 2);
+        }
+
+    }
 
     //声明进度条对话框
     ProgressDialog progressDialog = null;
@@ -70,8 +74,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         });
     }
 
-    protected <T> void savaValue(String key,T value){
-        SpUtil.putString(this,key,Base64.objBase64Str(value));
+    protected <T> void savaValue(String key, T value){
+        SpUtil.putString(this,key, Base64.objBase64Str(value));
     }
 
      protected <T> T getValue(String key){
@@ -120,22 +124,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-    protected void showDialog() {
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog, null);
-        final EditText ssid = (EditText) view.findViewById(R.id.ssid_id);
-        final EditText pass = (EditText) view.findViewById(R.id.pass_id);
-        new AlertDialog.Builder(this)
-                .setTitle("WiFi连接")
-                .setView(view)
-                .setPositiveButton("连接", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                })
-                .setNegativeButton("取消", null)
-                .setCancelable(false)
-                .show();
-    }
 
     protected abstract int getLayoutId();
 

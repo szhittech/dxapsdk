@@ -1,6 +1,8 @@
 package com.ap.moni.udp;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 
 import com.ap.moni.util.APConst;
 import com.ap.moni.util.Logc;
@@ -14,11 +16,17 @@ import com.het.udp.wifi.utils.ByteUtils;
 
 import java.nio.ByteBuffer;
 
-public class UdpDataHandler implements IObserver {
+public class UdpEventHandle implements IObserver {
     private Context context;
     public static final short HET_AP_RECV = (short) 0x8100;
     public static final short HET_AP_REPLY = (short) 0x8200;
     private static Thread recv8200Thread = null;
+    private Handler handler;
+
+    public UdpEventHandle(Handler handler) {
+        this.handler = handler;
+    }
+
     public void start(Context context){
         this.context = context;
         try {
@@ -121,9 +129,11 @@ public class UdpDataHandler implements IObserver {
                             }
                         }
 
-                        //TODO 开始连接路由器
                         destroy();
-
+                        Message msg = Message.obtain();
+                        msg.obj = apbindBean;
+                        msg.what = 1;
+                        handler.sendMessage(msg);
 
                     }
                 });

@@ -1,4 +1,4 @@
-package com.het.websocket.log;
+package com.ap.moni.util;
 
 import com.het.log.Logc;
 
@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 public class LogTool {
     public static String TAG = "";
     private Thread thread;
-    static Thread  cacheThread,clsCaThread;
+    static Thread cacheThread,clsCaThread;
     private ILogNotify logNotify;
 
     public LogTool(ILogNotify notify) {

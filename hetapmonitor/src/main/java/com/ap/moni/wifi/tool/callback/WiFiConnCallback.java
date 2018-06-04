@@ -1,4 +1,4 @@
-package com.ap.moni.wifi.callback;
+package com.ap.moni.wifi.tool.callback;
 
 public interface WiFiConnCallback {
     //0:不用再回调，1：存储ssid和密码

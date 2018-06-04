@@ -1,4 +1,4 @@
-package pi.com.pi.wifi;
+package com.ap.moni.ap;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -25,8 +25,8 @@ public class WiFiApManager {
     private static Context mContext;
     private WifiManager mWifiManager;
     private WiFiApStateListener wiFiApStateListener;
-    private boolean isInit = false;
     private boolean isRegister = false;
+    private static boolean isInit = false;
     //监听wifi热点的状态变化
     public static final String WIFI_AP_STATE_CHANGED_ACTION = "android.net.wifi.WIFI_AP_STATE_CHANGED";
     public static final String EXTRA_WIFI_AP_STATE = "wifi_state";
@@ -189,7 +189,7 @@ public class WiFiApManager {
             Method method2 = mWifiManager.getClass().getMethod("getWifiApState");
             state = (Integer) method2.invoke(mWifiManager);
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
+            Log.e(TAG, (e==null?"":e.getMessage()+""));
         }
         if(DEBUG)Log.i("WifiAP", "getWifiAPState.state " + state);
         return state;
@@ -233,7 +233,8 @@ public class WiFiApManager {
         return true;
     }
     //关闭WiFi热点
-    public void closeWifiAp() {
+    public void closeWifiAp(Context context) {
+        init(context);
         if (getWifiAPState() != WIFI_AP_STATE_DISABLED) {
             try {
                 Method method = mWifiManager.getClass().getMethod("getWifiApConfiguration");

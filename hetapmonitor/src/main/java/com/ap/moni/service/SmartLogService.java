@@ -1,4 +1,4 @@
-package com.het.websocket.log;
+package com.ap.moni.service;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -15,9 +15,6 @@ import android.os.PowerManager.WakeLock;
 import android.util.Log;
 
 import com.het.log.Logc;
-import com.het.websocket.http.SimpleHttpUtils;
-import com.het.websocket.util.Utils;
-import com.het.websocket.util.WSConst;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -482,7 +479,6 @@ public class SmartLogService extends Service {
                 Logc.i("====##mqtt The log's size is too big!");
                 new LogCollectorThread().start();
                 //超过了大小，则上传到server并删除
-                uploadFile(file);
             }
         }
 
@@ -818,47 +814,6 @@ public class SmartLogService extends Service {
         unregisterReceiver(logTaskReceiver);
         Log.d(TAG, "onDestroy... ");
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                uploadAllLog();
-            }
-        }).start();
-    }
-
-    private void uploadAllLog() {
-        List<File> files = Utils.getTxTFileList(LOG_PATH_SDCARD_DIR);
-        for (File file : files) {
-            uploadAfterDelFile(file);
-        }
-    }
-
-    private void uploadAfterDelFile(File file) {
-        String host = "http://" + WSConst.MQTT.LOCALHOST + ":8421/v1/api/file";
-        Map<String, String> headers = new HashMap<>();
-        headers.put("mqtt-clientid", Utils.getClientId(this));
-        try {
-            long start = System.currentTimeMillis();
-            String ret = SimpleHttpUtils.uploadFile(host, headers, file, "gwkey");
-            if (ret != null) {
-                long fileSize = file.length();
-                float useTime = System.currentTimeMillis() - start;
-                useTime = useTime / 1000.00f;
-                boolean isSuc = file.delete();
-                Logc.i("=###mqtt 上传[" + file.getName() + " size:" + (fileSize / 1024.0f) + "kb]耗时" + useTime + "秒,删除" + (isSuc ? "成功" : "失败") + file.getAbsolutePath());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void uploadFile(final File file){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                uploadAfterDelFile(file);
-            }
-        }).start();
     }
 
 }

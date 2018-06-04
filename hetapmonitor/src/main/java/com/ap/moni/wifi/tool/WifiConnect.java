@@ -2,7 +2,7 @@
  * WifiConnect.java
  * &nbsp;Author: cscmaker
  */
-package com.ap.moni.wifi;
+package com.ap.moni.wifi.tool;
 
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
